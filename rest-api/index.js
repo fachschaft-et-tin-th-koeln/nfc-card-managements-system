@@ -33,6 +33,7 @@ const http = require('http');
 
 // Importing route handlers
 const nfcCardsRoutes = require('./routes/nfc-cards.routes');
+const nfcProductRoutes = require('./routes/nfc-product.routes');
 
 // Server configuration
 const PORT = process.env.APP_PORT || 3000;
@@ -46,7 +47,8 @@ app.use(express.json());
 app.use(cors());
 
 // Route middlewares
-app.use('/api/nfc-cards', nfcCardsRoutes); 	// Routes for NFC card interactions
+app.use('/api/nfc-cards', nfcCardsRoutes); 		// Routes for NFC card interactions
+app.use('/api/nfc-products', nfcProductRoutes);	// Routes for NFC card interactions
 
 // Creating an HTTP server that uses the Express app
 const server = http.createServer(app);
