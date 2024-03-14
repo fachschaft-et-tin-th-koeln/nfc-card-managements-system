@@ -25,10 +25,10 @@ const mysql = require('mysql');
  */
 const pool = mysql.createPool({
 	connectionLimit: 10, // Maximum number of connections in the pool
-	host: process.env.DB_HOST, // Database host address
-	user: process.env.DB_USER, // Database user
-	password: process.env.DB_PASSWORD, // Database password
-	database: process.env.DB_DATABASE // Database name
+	host: process.env.MYSQL_HOST, // Database host address
+	user: process.env.MYSQL_USER, // Database user
+	password: process.env.MYSQL_PASSWORD, // Database password
+	database: process.env.MYSQL_DATABASE // Database name
 });
 
 /**
