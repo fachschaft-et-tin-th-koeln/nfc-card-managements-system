@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  app:
+    build:
+      context: ./rest-api
+    ports:
+      - "3000:3000"
+    container_name: 08-nfc-mananger-rest-api
+    env_file:
+      - ./rest-api/.env
+    depends_on:
+      - db
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./rest-api/database:/docker-entrypoint-initdb.d
+    container_name: 08-nfc-mananger-database
+    env_file:
+      - ./rest-api/.env
+    ports:
+      - "3306:3306"
