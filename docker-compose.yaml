@@ -16,21 +16,16 @@ services:
     volumes:
       - ./rest-api/database:/docker-entrypoint-initdb.d
     container_name: 08-nfc-mananger-database
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    env_file:
+      - ./rest-api/.env
     ports:
       - "3306:3306"
 
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_USER: ${MYSQL_USER}
-      PMA_PASSWORD: ${MYSQL_PASSWORD}
+    image: phpmyadmin/phpmyadmin    
+    container_name: 08-nfc-mananger-phpmyadmin
+    env_file:
+      - ./rest-api/.env
     ports:
       - "8085:80"
     depends_on:
