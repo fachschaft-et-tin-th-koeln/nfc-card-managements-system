@@ -14,9 +14,9 @@ void enterWLANMode()
 void handleWLANCommand(const String &command)
 {
     if (command == "configure") {
-        configureWLAN();
+        configureWifi();
     } else if (command == "detail") {
-        wlanDetails();
+        wifiDetails();
     } else if (command == "exit") {
         currentMode = Mode::Config;
     } else {
@@ -24,7 +24,7 @@ void handleWLANCommand(const String &command)
     }
 }
 
-void configureWLAN()
+void configureWifi()
 {
     String wifi_ssid;
     String wifi_password;
@@ -50,7 +50,7 @@ void configureWLAN()
     connectToWifi();
 }
 
-void wlanDetails()
+void wifiDetails()
 {
     preferences.begin("wifi", false);
 
@@ -64,6 +64,8 @@ void wlanDetails()
     Serial.println(ssid);
     Serial.print("Passwort: ");
     Serial.println(password);
+    Serial.print("Mac-Adresse: ");
+    Serial.println(WiFi.macAddress());
 
     if (WiFi.status() == WL_CONNECTED) {
         // Ausgabe der aktuellen WLAN-Verbindungsinformationen
@@ -93,7 +95,7 @@ void connectToWifi()
 
     if (ssid.length() == 0 || password.length() == 0) {
         Serial.println("SSID oder Passwort nicht konfiguriert.");
-        blinkLED(LED_PIN_RED, 500);
+        // blinkLED(LED_PIN_RED, 500);
         wifiFailed = true;
         return;
     }
@@ -106,19 +108,30 @@ void connectToWifi()
     while (millis() - startTime < connectTime &&
            WiFi.status() != WL_CONNECTED) {
         delay(500);
-        blinkLED(LED_PIN_ORANGE, 500);
+        // blinkLED(LED_PIN_ORANGE, 500);
     }
 
     if (WiFi.status() == WL_CONNECTED) {
         Serial.println("Mit WLAN verbunden.");
         Serial.print("IP-Adresse: ");
         Serial.println(WiFi.localIP());
-        blinkLED(LED_PIN_GREEN, 500);
+        // blinkLED(LED_PIN_GREEN, 500);
         delay(3000);
     } else {
         Serial.println("Verbindung zum WLAN fehlgeschlagen.");
         wifiFailed = true;
-        blinkLED(LED_PIN_RED, 500);
+        // blinkLED(LED_PIN_RED, 500);
         delay(3000);
+    }
+}
+
+void wifiTest()
+{
+    Serial.println("WLAN-Test wird durchgeführt...");
+
+    if (WiFi.status() == WL_CONNECTED) {
+        Serial.println(">>>true<<<");
+    } else {
+        Serial.println(">>>false<<<");
     }
 }

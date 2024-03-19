@@ -19,6 +19,6 @@ enum class Mode { Normal, Config, WLAN };
 
 extern Mode currentMode; // Externe Deklaration
 
-void blinkLED(int ledPin, unsigned long interval);
+// void blinkLED(int ledPin, unsigned long interval);
 
 #endif

@@ -8,8 +8,10 @@ extern boolean wifiFailed;
 
 void enterWLANMode();
 void handleWLANCommand(const String &command);
-void configureWLAN();
-void connectToWifi();
-void wlanDetails();
 
+void configureWifi();
+void connectToWifi();
+void wifiDetails();
+
+void wifiTest();
 #endif
