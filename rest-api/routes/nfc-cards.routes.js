@@ -28,17 +28,18 @@ const { generateHandshake, updateHandshakeAndTransact, setExpiryDate } = require
 router.post('/init', async (req, res) => {
 
 	try {
-		const cardId = uuidv4();
+		const { cardId, balance = 10 } = req.body;
+		// const cardId = uuidv4();
 		const handshake = generateHandshake();
 		const expiryDate = (req.body.expiryDate ? new Date(req.body.expiryDate) : setExpiryDate(new Date(), 2)).toISOString().split('T')[0];
 
-		const query = 'INSERT INTO nfc_cards (card_id, handshake, expiry_date) VALUES (?, ?, ?)';
+		const query = 'INSERT INTO nfc_cards (card_id, handshake, expiry_date, balance) VALUES (?, ?, ?, ?)';
 
-		const results = await db.query(query, [cardId, handshake, expiryDate]);
+		const results = await db.query(query, [cardId, handshake, expiryDate, balance]);
 		if (results.length === 0) {
 			return res.status(500).send({ message: 'Error initializing the card.', 'error': results.message });
 		}
-		return res.status(201).send({ cardId, handshake, expiryDate: expiryDate, message: 'Card initialized.' });
+		return res.status(201).send({ cardId, handshake, expiryDate: expiryDate, balance, message: 'Card initialized.' });
 	} catch (error) {
 		console.error(error);
 		return res.status(500).send({ message: 'Error initializing the card.', 'error': error.message });

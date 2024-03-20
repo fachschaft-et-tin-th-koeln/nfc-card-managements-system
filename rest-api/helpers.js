@@ -24,7 +24,7 @@ const db = require('./database/database');
  * @returns {string} A 40-character hexadecimal string representing the handshake token.
  */
 function generateHandshake() {
-	return crypto.randomBytes(20).toString('hex');
+	return crypto.randomBytes(6).toString('hex');
 };
 
 /**
