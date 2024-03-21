@@ -6,12 +6,30 @@
 #include <Wifi.h>
 #include <HTTPClient.h>
 #include <ArduinoJSON.h>
+#include <MFRC522.h>
+#include <SPI.h>
+
+
 
 #define GFX_BL DF_GFX_BL // default backlight pin, you may replace DF_GFX_BL to actual backlight pin
 
 #define WiFi_SSID "Fachschaft-ET2.4"
 #define WiFi_PASS "#B4nk#Fr3edom!"
 #define API_URL "http://192.168.5.20:3000"
+#define pfandpreis 1
+
+#define SS_PIN 17
+#define RST_PIN 25
+
+SPIClass spiTouch(HSPI);
+// Problem : 3 Module auf 2 SPI Bus -> 2 Module auf VSPI und 1 auf HSPI  SPI.begin() nutzt VSPI
+// Lösung : in touch.h SPI.begin() auf HSPI ändern durch extern SPIClass spiTouch in main.cpp; und spiTouch.begin() in touch.cpp
+// Lösung : in XPT2046_Touchscreen.cpp spiTouch.begin() ändern
+// Lösung : überall in XPT2046_Touchscreen.cpp und .h SPI durch spiTouch ersetzen
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance
+
+MFRC522::MIFARE_Key key;
 
 void writeText(String text, int middlex, int middley, int size, int color);
 void draw_bt_for_drinks(String *texts, int *borders);
@@ -27,6 +45,8 @@ void init();
 bool check_wifi();
 void getDrinks();
 void payload_to_json(String payload);
+int readRFID_and_send(float amount);
+
 
 /* More dev device declaration: https://github.com/moononournation/Arduino_GFX/wiki/Dev-Device-Declaration */
 #if defined(DISPLAY_DEV_KIT)
@@ -62,20 +82,13 @@ void setup(void)
   Serial.begin(115200);
   // Serial.setDebugOutput(true);
   // while(!Serial);
-  String macAddress = WiFi.macAddress();
-  Serial.println(macAddress);
-  // Connect to Wi-Fi
-  WiFi.begin(WiFi_SSID, WiFi_PASS);
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.println("Connecting to WiFi...");
-  }
-  Serial.println("Connected to the WiFi network");
 
 
   Serial.println("Arduino_GFX Hello World example");
   // print the display dev kit name and the what is in bus
+
+  // Init RFID Reader
+  
   
 
 
@@ -88,6 +101,10 @@ void setup(void)
   {
     Serial.println("gfx->begin() failed!");
   }
+  delay(1000);
+  SPI.begin();      // Init SPI bus ? wird das benötigt ?
+  mfrc522.PCD_Init();   // Init MFRC522
+  mfrc522.PCD_DumpVersionToSerial();  // Show details of PCD - MFRC522 Card Reader details
   gfx->setRotation(2);
   gfx->fillScreen(BLACK);
 
@@ -98,6 +115,11 @@ void setup(void)
 
   // Init touch device
   touch_init(gfx->width(), gfx->height(), gfx->getRotation());
+
+  
+  Serial.println("2");
+  mfrc522.PCD_DumpVersionToSerial();  // Show details of PCD - MFRC522 Card Reader details
+
 
 
   // Display layout for connecting to WiFi
@@ -110,7 +132,23 @@ void setup(void)
   gfx->fillArc(160, 300, 25, 20, 215, 325, WHITE); // 
   gfx->fillArc(160, 300, 40, 35, 215, 325, WHITE); // 
   gfx->fillArc(160, 300, 55, 50, 215, 325, WHITE); // 
-  delay(1000); // 3 seconds
+
+  String macAddress = WiFi.macAddress();
+  Serial.println(macAddress);
+  // Connect to Wi-Fi
+  WiFi.begin(WiFi_SSID, WiFi_PASS);
+  int counter = 0;
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    counter++;
+    Serial.println("Connecting to WiFi...");
+    if (counter > 20)
+    {
+      ESP.restart();
+    }
+  }
+  Serial.println("Connected to the WiFi network");
 
   // Display layout for successfully connected to WiFi
   gfx->fillScreen(BLACK);
@@ -120,11 +158,24 @@ void setup(void)
   gfx->println("Successfully \n   connected!");
   delay(1000); // 3 seconds
 
+  mfrc522.PICC_HaltA(); // Halt PICC
+
   getDrinks();
 }
 
 void loop()
 {
+  // mfrc522.PCD_DumpVersionToSerial();  // Show details of PCD - MFRC522 Card Reader details
+  // if(!mfrc522.PICC_IsNewCardPresent())
+  // {
+  //   return;
+  // }
+  // if (!mfrc522.PICC_ReadCardSerial())
+  // {
+  //   return;
+  // }
+  // Serial.println("Card detected");
+
     // Display layout for GUI with 6 large Buttons, 2, 2, 2 layout and a small Battery Text on the top right next to a small WiFi icon
   gfx->fillScreen(BLACK);
   writePercentage(69);
@@ -538,16 +589,25 @@ void pay_the_bill()
   {
     gesamtpreis += amount_clicked[i] * prices[i];
   }
-  gesamtpreis -= depositamount * 1;
+  gesamtpreis -= depositamount * pfandpreis;
   sprintf(buffer, "  %-7s %.2f", "Gesamt", gesamtpreis, "€");
   gfx->println(buffer);
 
 
 
-  
+  int flag = 0;
   bool abbruch = false;
   while(!is_paid && !abbruch)
   {
+    flag = readRFID_and_send(gesamtpreis);
+    if (flag == 1)
+    {
+      is_paid = true;
+    }
+    if (flag == 2)
+    {
+      abbruch = true;
+    }
     if(touch_touched)
     {
       int32_t x1, y1, actualx, actualy, counter;
@@ -568,11 +628,7 @@ void pay_the_bill()
         }
         int x = actualx / counter;
         int y = actualy / counter;
-        if (x > 15 && x < 290 && y > 0 && y < 290)
-        {
-          is_paid = true;
-        }
-        else if (x > 15 && x < 290 && y > 330 && y < 450)
+        if (x > 15 && x < 290 && y > 330 && y < 450)
         {
           abbruch = true;
         }
@@ -622,8 +678,6 @@ void getDrinks()
     if (httpCode > 0)
     {
       String payload = http.getString();
-      Serial.println("payload:");
-      Serial.println(payload);
       payload_to_json(payload);
     }
     else
@@ -670,3 +724,66 @@ void payload_to_json(String payload)
   texts[amount-1] = "Abbruch";
   
 }
+
+int readRFID_and_send(float amount)
+{
+  // hier wird die RFID gelesen und die Daten an den Server gesendet
+  // HTTP-Anfrage
+  if(!mfrc522.PICC_IsNewCardPresent())
+  {
+    return 0;
+  }
+  if (!mfrc522.PICC_ReadCardSerial())
+  {
+    return 0;
+  }
+  String uid = "";
+  for (byte i = 0; i < mfrc522.uid.size; i++)
+  {
+    uid.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? "0" : ""));
+    uid.concat(String(mfrc522.uid.uidByte[i], HEX));
+  }
+  Serial.println(uid);
+  mfrc522.PICC_HaltA();
+
+  if (WiFi.status() == WL_CONNECTED)
+  {
+    HTTPClient http;
+    http.begin(String(API_URL) + "/api/nfc-cards/debit");
+    http.addHeader("Content-Type", "application/json");
+    // erstelle eine json mit {"uid": uid, "amount": amount, "handshake": "1234"}
+    // uppercase uid please
+    uid.toUpperCase();
+    String json = "{\"cardId\":\"" + uid + "\",\"amount\":" + amount + ",\"handshake\":\"1234\"}";
+    Serial.println(json);
+    int httpCode = http.POST(json);
+    if (httpCode > 0)
+    {
+      String payload = http.getString();
+      Serial.println("payload:");
+      Serial.println(payload);
+      payload_to_json(payload);
+      http.end();
+      if (payload == "1")
+      {
+        return 1;
+      }
+      else
+      {
+        return 0;
+      }
+    }
+    else
+    {
+      Serial.println("HTTP Code: ");
+      Serial.println(httpCode);
+      return 2;
+    }
+  }
+  else
+  {
+    Serial.println("WiFi disconnected");
+    return 2;
+  }
+}
+
