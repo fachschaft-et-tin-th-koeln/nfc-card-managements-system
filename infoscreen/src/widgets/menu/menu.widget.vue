@@ -12,7 +12,7 @@
 						<div class="category-title hidden">{{ type }}</div>
 						<div v-for="product in products" :key="product.id" :class="{'line-through' : !product.active}" class="product-item flex flex-col text-4xl -font-writers mb-3">
 							<div class="flex justify-between items-center" >
-								<div class='title max-w-40 font-semibold whitespace-wrap truncate'>
+								<div class='title max-w-[300px] w-full font-semibold whitespace-wrap truncate'>
 									{{ product.name}}
 								</div>
 								<div class="price text-3xl">
