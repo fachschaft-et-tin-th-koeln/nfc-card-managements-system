@@ -33,7 +33,7 @@ export default class MenuWidget extends Vue implements IWidget {
 	}
 
 	private async getProducts() {
-		const service = new ApiService<Product>('api/products?active=1');
+		const service = new ApiService<Product>('api/nfc-products?active=1');
 		await service.initialize();
 
 		if (service.code == 200) {

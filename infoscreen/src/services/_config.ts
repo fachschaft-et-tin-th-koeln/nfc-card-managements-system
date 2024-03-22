@@ -10,8 +10,5 @@
  * @since: 1.0.0
  */
 export default {
-	// apiUrl: 'http://localhost:3000',
-	// apiUrl: 'http://192.168.178.23:3000',
-	apiUrl: 'http://192.168.5.24:3000',
-	// apiUrl: 'http://192.168.1.190:3000'
+	apiUrl: 'http://192.168.5.20:3000',
 };

@@ -9,12 +9,6 @@ module.exports = defineConfig({
 				pathRewrite: { '^/api': '' }, // Entfernt /api aus dem Pfad
 				secure: false, // Wenn der Zielserver selbstsignierte Zertifikate verwendet
 			},
-			'/schulz': {
-				target: 'http://192.168.1.15',
-				changeOrigin: true, // Wichtig, um sicherzustellen, dass der Host-Header der Ziel-URL entspricht
-				pathRewrite: { '^/schulz': '' }, // Entfernt /api aus dem Pfad
-				secure: false, // Wenn der Zielserver selbstsignierte Zertifikate verwendet
-			}
 		},
 	},
 })

@@ -36,8 +36,8 @@ export default class ThF07IcalWidget extends Vue implements IWidget {
 
 	async fetchCalendar() {
 		try {
-			// const response = await fetch('https://ilu.th-koeln.de/calendar.php?client_id=thkilu&token=1b18c1ea1f5ab118d3a8596cc746e9ae&limited=0');
-			const response = await fetch('/api/calendar.php?client_id=thkilu&token=1b18c1ea1f5ab118d3a8596cc746e9ae&limited=0');
+			const response = await fetch('https://ilu.th-koeln.de/calendar.php?client_id=thkilu&token=1b18c1ea1f5ab118d3a8596cc746e9ae&limited=0');
+			// const response = await fetch('/api/calendar.php?client_id=thkilu&token=1b18c1ea1f5ab118d3a8596cc746e9ae&limited=0');
 			const text = await response.text();
 			const jcalData = ical.parse(text);
 
