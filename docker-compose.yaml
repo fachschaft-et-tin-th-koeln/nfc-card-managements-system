@@ -30,3 +30,10 @@ services:
       - "8085:80"
     depends_on:
       - db
+
+  infoscreen:
+    build:
+      context: ./infoscreen
+    ports:
+      - "8080:80"
+    container_name: 08-nfc-mananger-infoscreen
