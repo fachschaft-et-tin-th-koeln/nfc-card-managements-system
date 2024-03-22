@@ -8,8 +8,9 @@ body {
 	@apply flex;
 	/* @apply min-h-[720px]; */
 	/* @apply min-h-[1280px]; */
-	@apply max-h-[1080px];
-	@apply max-w-[1920px];
+	@apply h-full w-full;
+	@apply h-[1080px];
+	@apply w-[1920px];
 	/* @apply w-screen; */
 	/* @apply h-screen; */
 	@apply bg-black/80;
@@ -31,14 +32,14 @@ body {
 .bg-light {
 	background-image: url('@/assets/img/background/light.jpg');
 	background-image: url('@/assets/img/background/party.jpg');
-	background-size: 1920px 1080px;
+	background-size: 100%;
 	background-repeat: no-repeat;
 }
 
 .dark\:bg-dark {
 	background-image: url('@/assets/img/background/dark.jpg');
 	background-image: url('@/assets/img/background/party.jpg');
-	background-size: 1920px 1080px;
+	background-size: 100%;
 	background-repeat: no-repeat;
 }
 

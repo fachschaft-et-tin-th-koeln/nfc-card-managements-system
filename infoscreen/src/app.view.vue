@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-grow old-p-10">
+	<div class="h-full w-full flex flex-grow old-p-10">
 		<VueLayout />
 	</div>
 </template>
