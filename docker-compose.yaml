@@ -35,5 +35,5 @@ services:
     build:
       context: ./infoscreen
     ports:
-      - "8080:80"
+      - "8082:80"
     container_name: 08-nfc-mananger-infoscreen
