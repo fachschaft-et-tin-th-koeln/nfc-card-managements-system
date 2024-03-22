@@ -20,7 +20,7 @@
 									<span>{{ product.price.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }} €</span>
 								</div>
 							</div>
-							<p class="subtitle text-base">{{ product.description }}</p>
+							<p class="subtitle text-base" v-html="product.description"></p>
 						</div>
 					</div>
 				</div>
