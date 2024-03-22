@@ -9,10 +9,10 @@
 		<div class="grid-item col-start-9 col-end-13 row-start-1 row-span-3 h-[450px]">
 			<clock-widget />
 		</div>
-		<div class="grid-item col-start-9 col-end-13 row-start-4 row-span-2 h-[450px]">
+		<div class="grid-item col-start-9 col-end-13 row-start-7 row-span-2 h-[400px]">
 
 		</div>
-		<div class="grid-item col-start-1 col-end-13 row-start-6 row-span-7 h-[180px]">
+		<div class="grid-item col-start-1 col-end-13 row-start-12 row-span-7 h-[180px]">
 
 		</div>
 	</div>
