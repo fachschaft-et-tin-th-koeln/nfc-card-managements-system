@@ -1,0 +1,137 @@
+@import url('fonts.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply flex;
+	/* @apply min-h-[720px]; */
+	/* @apply min-h-[1280px]; */
+	@apply max-h-[1080px];
+	@apply max-w-[1920px];
+	/* @apply w-screen; */
+	/* @apply h-screen; */
+	@apply bg-black/80;
+
+	@apply overflow-hidden;
+	/* @apply overflow-x-scroll; */
+
+	/* font-family: "Barlow Condensed", sans-serif; */
+	/* font-size: 26px; */
+	/* font-weight: 500; */
+	/* letter-spacing: -1.5px; */
+	line-height: normal;
+}
+
+.vertical-text {
+	writing-mode: vertical-rl;
+}
+
+.bg-light {
+	background-image: url('@/assets/img/background/light.jpg');
+	background-image: url('@/assets/img/background/party.jpg');
+	background-size: 1920px 1080px;
+	background-repeat: no-repeat;
+}
+
+.dark\:bg-dark {
+	background-image: url('@/assets/img/background/dark.jpg');
+	background-image: url('@/assets/img/background/party.jpg');
+	background-size: 1920px 1080px;
+	background-repeat: no-repeat;
+}
+
+.grid-item {
+	@apply bg-black/75;
+}
+
+.widget {
+	@apply h-full;
+	/* @apply w-full; */
+	/* @apply border; */
+	/* @apply border-white; */
+	/* @apply bg-[#62AF3D]; */
+
+	&-wrapper {
+		@apply flex;
+		@apply h-full;
+		@apply w-full;
+		@apply flex-col;
+		@apply justify-center;
+		@apply items-center;
+
+	}
+
+	&-header,
+	&-content {
+		@apply p-4;
+		@apply text-5xl;
+	}
+
+	&-header {
+		@apply bg-white;
+	}
+
+	&-content {}
+
+	&-footer {}
+}
+
+.widget-menu {
+	/* width: 600px; */
+	/* background-image: url('@/assets/img/speisekarte.jpg'); */
+	/* background-size: 100% auto; */
+}
+
+
+
+.old-menu {
+	.category-title {
+		@apply text-3xl;
+		/* @apply flex; */
+		@apply items-center;
+		@apply w-full;
+		@apply mb-3;
+		@apply capitalize;
+		@apply after:content-[''];
+		@apply after:grow;
+		@apply after:ml-3;
+		@apply after:bg-[#453B34];
+		@apply after:dark:bg-white;
+		@apply after:h-2;
+	}
+
+	.menu {
+		column-count: 2;
+		/* column-gap: 1em; */
+	}
+
+	.menu-column {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.section {
+		break-inside: avoid-column;
+		page-break-inside: avoid;
+		-webkit-column-break-inside: avoid;
+	}
+
+	.section h2 {
+		margin-top: 0;
+	}
+
+	.product-item {
+		.title {
+			max-width: 11rem;
+			/* 160px */
+		}
+	}
+
+	.line-through {
+		text-decoration-line: line-through;
+		text-decoration-color: black;
+		text-decoration-thickness: .2rem;
+	}
+}

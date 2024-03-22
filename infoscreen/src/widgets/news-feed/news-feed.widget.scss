@@ -1,0 +1,127 @@
+.ticker-container {
+	// overflow: hidden;
+	// white-space: nowrap;
+}
+
+.ticker {
+	// display: flex;
+	// will-change: transform;
+
+}
+
+.ticker-item {
+	&:after {
+		// content: '++';
+
+	}
+}
+
+@keyframes ticker {
+	from {
+		transform: translateX(100%);
+	}
+
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+.old-ticker {
+	overflow: hidden;
+
+	.ticker-content {
+		display: flex;
+		transition: transform 0.5s ease;
+	}
+
+	.news-item {
+		flex: 0 0 100%;
+
+		.title {
+			font-size: 16px;
+		}
+	}
+
+	@keyframes ticker {
+		from {
+			transform: translateX(100%);
+		}
+
+		to {
+			transform: translateX(-100%);
+		}
+	}
+}
+
+.old {
+
+	.grid-12 {
+		/* display: grid;
+		grid-template-rows: repeat(12, minmax(0, 1fr));
+		grid-template-columns: repeat(12, minmax(0, 1fr)); */
+	}
+
+	.announcements-container {
+		/* position: absolute; */
+		display: flex;
+		/* top: 40%; */
+		/* left: 20%; */
+		background: #f5f5f5;
+		overflow: hidden;
+		display: inline-block;
+		height: 40px;
+		line-height: 40px;
+		border-top-left-radius: 4px;
+		border-bottom-left-radius: 4px;
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	}
+
+	.container-title {
+		width: 100px;
+		height: 100%;
+		overflow: hidden;
+		padding: 0 15px 0 15px;
+		float: left;
+		background: #03a9f4;
+		text-align: center;
+		font-size: 13px;
+		text-transform: uppercase;
+		color: white;
+		letter-spacing: 1px;
+		border-top-left-radius: 2px;
+		border-bottom-left-radius: 2px;
+	}
+
+	ul.announcements {
+		width: calc(100% - 100px);
+		float: left;
+		height: 40px;
+		overflow: hidden;
+		list-style-type: none;
+		vertical-align: middle;
+
+	}
+
+	ul.announcements li {
+		width: calc(100% - 100px);
+		overflow: hidden;
+		font-size: 14px;
+		margin: 0 auto;
+		vertical-align: middle;
+		padding: 0;
+		line-height: 40px;
+		text-align: left;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
+	ul.announcements li span {
+		width: 100%;
+		text-decoration: none;
+		color: #212121;
+		-o-transition: color 0.5s ease-out;
+		transition: color 0.5s ease-out;
+
+	}
+
+}

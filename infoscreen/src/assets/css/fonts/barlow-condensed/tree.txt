@@ -1,0 +1,26 @@
+Auflistung der Ordnerpfade für Volume Volume
+Volumeseriennummer : 1CDA-D2B9
+D:.
+    BarlowCondensed-Black.ttf
+    BarlowCondensed-BlackItalic.ttf
+    BarlowCondensed-Bold.ttf
+    BarlowCondensed-BoldItalic.ttf
+    BarlowCondensed-ExtraBold.ttf
+    BarlowCondensed-ExtraBoldItalic.ttf
+    BarlowCondensed-ExtraLight.ttf
+    BarlowCondensed-ExtraLightItalic.ttf
+    BarlowCondensed-Italic.ttf
+    BarlowCondensed-Light.ttf
+    BarlowCondensed-LightItalic.ttf
+    BarlowCondensed-Medium.ttf
+    BarlowCondensed-MediumItalic.ttf
+    BarlowCondensed-Regular.ttf
+    BarlowCondensed-SemiBold.ttf
+    BarlowCondensed-SemiBoldItalic.ttf
+    BarlowCondensed-Thin.ttf
+    BarlowCondensed-ThinItalic.ttf
+    OFL.txt
+    tree.txt
+    
+Es sind keine Unterordner vorhanden 
+
