@@ -7,6 +7,8 @@
  * TouchLib: https://github.com/mmMicky/TouchLib.git
  ******************************************************************************/
 
+
+
 /* uncomment for XPT2046 */
 #define TOUCH_XPT2046
 #define TOUCH_XPT2046_SCK 4
@@ -35,6 +37,7 @@ int16_t touch_map_y2 = 149;
 int16_t touch_max_x = 0, touch_max_y = 0;
 int16_t touch_raw_x = 0, touch_raw_y = 0;
 int16_t touch_last_x = 0, touch_last_y = 0;
+extern SPIClass spiTouch;
 
 #if defined(TOUCH_XPT2046)
 #include <XPT2046_Touchscreen.h>
@@ -88,7 +91,7 @@ void touch_init(int16_t w, int16_t h, uint8_t r)
   }
 
 #if defined(TOUCH_XPT2046)
-  SPI.begin(TOUCH_XPT2046_SCK, TOUCH_XPT2046_MISO, TOUCH_XPT2046_MOSI, TOUCH_XPT2046_CS);
+  spiTouch.begin(TOUCH_XPT2046_SCK, TOUCH_XPT2046_MISO, TOUCH_XPT2046_MOSI, TOUCH_XPT2046_CS);
   ts.begin();
   ts.setRotation(TOUCH_XPT2046_ROTATION);
 
