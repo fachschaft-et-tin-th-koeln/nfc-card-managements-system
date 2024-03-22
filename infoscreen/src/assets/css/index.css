@@ -31,14 +31,14 @@ body {
 .bg-light {
 	background-image: url('@/assets/img/background/light.jpg');
 	background-image: url('@/assets/img/background/party.jpg');
-	background-size: 1920px 1080px;
+	background-size: 100%;
 	background-repeat: no-repeat;
 }
 
 .dark\:bg-dark {
 	background-image: url('@/assets/img/background/dark.jpg');
 	background-image: url('@/assets/img/background/party.jpg');
-	background-size: 1920px 1080px;
+	background-size: 100%;
 	background-repeat: no-repeat;
 }
 

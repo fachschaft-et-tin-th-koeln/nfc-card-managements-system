@@ -1,9 +1,9 @@
 <template>
 	<div class="grid grid-cols-12 grid-rows-12 w-screen gap-4">
-		<div class="grid-item col-start-1 col-end-5 row-start-1 row-span-5 h-[calc(900px - 1rem)]">
+		<div class="grid-item col-start-1 col-end-5 row-start-1 row-span-5 h-[900px]">
 			<menu-widget />
 		</div>
-		<div class="grid-item col-start-5 col-end-9 row-start-1 row-span-5 h-[calc(900px - 1rem)]">
+		<div class="grid-item col-start-5 col-end-9 row-start-1 row-span-5 h-[900px]">
 
 		</div>
 		<div class="grid-item col-start-9 col-end-13 row-start-1 row-span-3 h-[450px]">

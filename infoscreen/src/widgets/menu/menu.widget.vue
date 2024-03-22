@@ -15,7 +15,7 @@
 								<div class='title max-w-40 font-semibold whitespace-wrap truncate'>
 									{{ product.name}}
 								</div>
-								<div class="price text-lg">
+								<div class="price text-3xl">
 									<span v-if="type !== 'food'" class="text-xs">{{ `${product.size} ${product.unit}` }} / </span>
 									<span>{{ product.price.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) }} €</span>
 								</div>
