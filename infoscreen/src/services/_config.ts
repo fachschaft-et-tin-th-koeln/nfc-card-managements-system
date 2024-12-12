@@ -10,5 +10,6 @@
  * @since: 1.0.0
  */
 export default {
-	apiUrl: 'http://192.168.5.20:3000',
+	apiUrl: "http://192.168.5.20:3000",
+	//   apiUrl: "http://192.168.5.59:3000",
 };

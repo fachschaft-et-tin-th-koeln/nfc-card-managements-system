@@ -21,19 +21,20 @@
  */
 
 // Loads environment variables from a .env file into process.env
-require('dotenv').config();
+require("dotenv").config();
 
 // Web framework for creating the API endpoints
-const express = require('express');
+const express = require("express");
 // Middleware to enable CORS
-const cors = require('cors');
+const cors = require("cors");
 
 // Importing Node's native HTTP module to create an HTTP server
-const http = require('http');
+const http = require("http");
 
 // Importing route handlers
-const nfcCardsRoutes = require('./routes/nfc-cards.routes');
-const nfcProductRoutes = require('./routes/nfc-product.routes');
+const nfcCardsRoutes = require("./routes/nfc-cards.routes");
+const nfcProductRoutes = require("./routes/nfc-product.routes");
+const nfcSettingRoutes = require("./routes/nfc-settings.routes");
 
 // Server configuration
 const PORT = process.env.APP_PORT || 3000;
@@ -47,20 +48,20 @@ app.use(express.json());
 app.use(cors());
 
 // Route middlewares
-app.use('/api/nfc-cards', nfcCardsRoutes); 		// Routes for NFC card interactions
-app.use('/api/nfc-products', nfcProductRoutes);	// Routes for NFC card interactions
+app.use("/api/nfc-cards", nfcCardsRoutes); // Routes for NFC card interactions
+app.use("/api/nfc-products", nfcProductRoutes); // Routes for NFC card interactions
+app.use("/api/settings", nfcSettingRoutes); // Routes for NFC card interactions
 
 // Creating an HTTP server that uses the Express app
 const server = http.createServer(app);
 
 // Middleware for error handling
 app.use((err, req, res, next) => {
-	console.error(err.stack);
-	res.status(500).send('Etwas ist schief gelaufen!');
+  console.error(err.stack);
+  res.status(500).send("Etwas ist schief gelaufen!");
 });
 
 // Starting the server
 server.listen(PORT, () => {
-	console.log(`Server läuft auf Port ${PORT}`);
+  console.log(`Server läuft auf Port ${PORT}`);
 });
-

@@ -1,4 +1,4 @@
-@import url('fonts.css');
+@import url("fonts.css");
 
 @tailwind base;
 @tailwind components;
@@ -30,21 +30,22 @@ body {
 }
 
 .bg-light {
-	background-image: url('@/assets/img/background/light.jpg');
-	background-image: url('@/assets/img/background/party.jpg');
+	background-image: url("@/assets/img/background/light.jpg");
+	background-image: url("@/assets/img/background/party.jpg");
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
 
 .dark\:bg-dark {
-	background-image: url('@/assets/img/background/dark.jpg');
-	background-image: url('@/assets/img/background/party.jpg');
+	background-image: url("@/assets/img/background/dark.jpg");
+	background-image: url("@/assets/img/background/party.jpg");
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
 
 .grid-item {
-	@apply bg-black/75;
+	/* @apply bg-black/30; */
+	/* @apply border border-gray-500; */
 }
 
 .widget {
@@ -61,7 +62,6 @@ body {
 		@apply flex-col;
 		@apply justify-center;
 		@apply items-center;
-
 	}
 
 	&-header,
@@ -74,9 +74,11 @@ body {
 		@apply bg-white;
 	}
 
-	&-content {}
+	&-content {
+	}
 
-	&-footer {}
+	&-footer {
+	}
 }
 
 .widget-menu {
@@ -84,8 +86,6 @@ body {
 	/* background-image: url('@/assets/img/speisekarte.jpg'); */
 	/* background-size: 100% auto; */
 }
-
-
 
 .old-menu {
 	.category-title {
@@ -133,6 +133,6 @@ body {
 	.line-through {
 		text-decoration-line: line-through;
 		text-decoration-color: black;
-		text-decoration-thickness: .2rem;
+		text-decoration-thickness: 0.2rem;
 	}
 }

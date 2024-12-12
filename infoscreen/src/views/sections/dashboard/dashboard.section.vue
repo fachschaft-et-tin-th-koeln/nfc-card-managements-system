@@ -7,7 +7,7 @@
 			<menu-widget />
 		</div>
 		<div class="grid-item col-start-9 col-end-13 row-start-1 row-span-3 h-[450px]">
-			<clock-widget class="p-8"/>
+			<clock-widget class="p-8" />
 		</div>
 		<div class="grid-item col-start-9 col-end-13 row-start-4 row-span-2 h-[433px] hidden">
 			<t-h-f07-ical-widget />
