@@ -24,12 +24,19 @@ module.exports = {
 				writers: ["kb-writers-block"],
 				bowlby: ["bowlby-one-sc"],
 				cute: ["Cute Be Special"],
+				trailmade: ["Trailmade"],
 			},
 			backgroundImage: {
 				christmas: "url('@/assets/christmas-bg.jpg')", // Verwende den Alias für den Vue-Assets-Ordner
+				"gradient-to-r": "linear-gradient(to right, #4facfe, #00f2fe)",
+			},
+			backgroundImage: {
+				party: "url('@/assets/party-bg.jpg')", // Verwende den Alias für den Vue-Assets-Ordner
 				"gradient-to-r": "linear-gradient(to right, #4facfe, #00f2fe)",
 			},
 		},
 	},
 	plugins: [],
 };
+
+// trailMate

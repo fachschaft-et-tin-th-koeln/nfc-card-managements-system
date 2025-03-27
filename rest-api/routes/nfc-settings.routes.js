@@ -6,7 +6,8 @@ const db = require("../database/database");
 router.get("/mode", async (req, res) => {
   try {
     // Ermittelt den 'mode'-Eintrag aus der Tabelle 'nfc_settings'
-    const settingsQuery = "SELECT * FROM nfc_settings WHERE slug = ?";
+    const settingsQuery =
+      "SELECT * FROM nfc_settings WHERE slug = ? and active = 1";
     const settingsResults = await db.query(settingsQuery, ["mode"]);
 
     if (settingsResults.length === 0) {

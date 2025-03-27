@@ -71,7 +71,7 @@ export default class ChristmasLayout extends Vue {
 
 	get groupedDrinkProducts(): Record<string, Product[]> {
 		return Object.entries(this.groupedProducts)
-			.filter(([type]) => type !== "food") // Nur Produkte mit 'type' == 'food'
+			.filter(([type]) => type !== "food" && type !== "special") // Nur Produkte mit 'type' == 'food'
 			.reduce((acc: Record<string, Product[]>, [type, products]) => {
 				acc[type] = products;
 				return acc;

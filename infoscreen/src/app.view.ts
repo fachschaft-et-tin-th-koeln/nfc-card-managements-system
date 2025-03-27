@@ -9,6 +9,7 @@ const element = document.getElementsByTagName("html")[0];
 // Layouts
 import VueLayout from "@/layouts/index.layout.vue";
 import ChristmasLayout from "@/layouts/christmas.layout.vue";
+import PartyLayout from "./layouts/party.layout.vue";
 
 // Interfaces
 interface Setting {
@@ -24,6 +25,7 @@ interface Setting {
 	components: {
 		VueLayout,
 		ChristmasLayout,
+		PartyLayout,
 	},
 })
 export default class App extends Vue {
@@ -42,6 +44,7 @@ export default class App extends Vue {
 
 		if (service.code == 200) {
 			const data = service.data as Setting[];
+			console.log(data);
 			if (data) {
 				this.displayMode = (data as any).value;
 				store.commit("SET_DISPLAY_MODE", this.displayMode);

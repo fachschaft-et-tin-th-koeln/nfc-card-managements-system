@@ -7,6 +7,9 @@
 		<template v-if="displayMode === 'christmas'">
 			<ChristmasLayout />
 		</template>
+		<template v-if="displayMode === 'party'">
+			<PartyLayout />
+		</template>
 		<template v-else>
 			<VueLayout />
 		</template>
