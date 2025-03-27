@@ -165,3 +165,10 @@
 	font-weight: 100;
 	font-style: normal;
 }
+
+@font-face {
+	font-family: "Trailmade";
+	src: url("@/assets/css/fonts/trailmade/trailmade.otf") format("truetype");
+	font-weight: 100;
+	font-style: normal;
+}

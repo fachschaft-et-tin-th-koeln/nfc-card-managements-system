@@ -132,7 +132,7 @@
 
 								<!-- Specials -->
 								<div
-									class="grid-item col-start-6 col-end-10 row-start-7 row-end-10 transform rotate-[-5deg]">
+									class="grid-item col-start-7 col-end-11 row-start-6 row-end-10 transform rotate-[-5deg]">
 									<div class="absolute top-[30px] left-[-35px] h-[163px] w-[391px] z-[-99]">
 										<img :src="require('@/assets/party-circle-1.png')" alt="party-line-1"
 											class="w-full h-full"
@@ -161,7 +161,7 @@
 																}) }} €</span>
 														</div>
 													</div>
-													<p class="subtitle text-xs" v-html="product.description"></p>
+													<p class="subtitle text-xl" v-html="product.description"></p>
 												</div>
 											</div>
 										</div>
@@ -169,7 +169,7 @@
 								</div>
 								<!-- Shots -->
 								<div
-									class="grid-item col-start-1 col-end-4 row-start-8 row-end-8 transform rotate-[-3deg]">
+									class="grid-item col-start-1 col-end-6 row-start-7 row-end-8 transform rotate-[-3deg]">
 									<div class="flex flex-col px-8">
 										<h1 class="text-center text-5xl pt-0 pb-4">Shots</h1>
 										<div class="flex flex-col">
@@ -193,7 +193,7 @@
 																}) }} €</span>
 														</div>
 													</div>
-													<p class="subtitle text-xs" v-html="product.description"></p>
+													<p class="subtitle text-xl" v-html="product.description"></p>
 												</div>
 											</div>
 										</div>
